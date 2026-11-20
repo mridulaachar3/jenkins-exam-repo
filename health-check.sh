@@ -1,6 +1,6 @@
 #!/bin/bash
 # Basic health check script (Jenkins Freestyle job runs this)
-echo "=== Health Check v1 ==="
+echo "=== Health Check v2 ==="
 echo "Date : $(date)"
 echo "Host : $(hostname)"
 echo "Disk : $(df -h / | tail -1 | awk '{print $5}') used"
