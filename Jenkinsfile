@@ -3,15 +3,22 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo 'Building the Flask application...'
-                sh 'python3 --version'
-                sh 'python3 -m py_compile app.py'
+                echo 'Creating virtual environment and installing dependencies...'
+                sh '''
+                python3 -m venv --system-site-packages venv
+                . venv/bin/activate
+                pip install -r requirements.txt
+                python -m py_compile app.py
+                '''
             }
         }
         stage('Test') {
             steps {
                 echo 'Running unit tests...'
-                sh 'python3 -m unittest discover -s . -v'
+                sh '''
+                . venv/bin/activate
+                python -m unittest discover -s . -v
+                '''
             }
         }
         stage('Deploy') {
